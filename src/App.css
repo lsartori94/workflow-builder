@@ -1,0 +1,446 @@
+@import './styles/theme.css';
+
+/* Layout */
+.workflow-builder {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-primary);
+}
+
+/* Header */
+.workflow-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-primary);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.workflow-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.workflow-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* Content */
+.workflow-content {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.workflow-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-primary);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.workflow-sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-section {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.sidebar-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  margin: 0 0 var(--space-md) 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Canvas */
+.canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-primary);
+  width: 100%;
+  height: 100%;
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 101;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+}
+
+.sidebar-toggle:hover {
+  background: var(--bg-tertiary);
+  box-shadow: var(--shadow-lg);
+}
+
+.sidebar-toggle.sidebar-open {
+  left: 300px;
+}
+
+/* React Flow Overrides */
+.react-flow {
+  background: var(--bg-primary);
+}
+
+.react-flow__background {
+  background: var(--bg-primary);
+}
+
+.react-flow__background .react-flow__background-pattern {
+  stroke: var(--border-secondary);
+  opacity: 0.5;
+}
+
+/* Palette */
+.workflow-palette {
+  /* Styles handled by component */
+}
+
+.palette-header {
+  margin-bottom: var(--space-md);
+}
+
+.palette-title {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.palette-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.palette-node-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.palette-node-button:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-sm);
+}
+
+.node-icon {
+  font-size: 16px;
+}
+
+.node-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Import/Export Controls */
+.import-export-controls {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* Validation Badge */
+.validation-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  position: relative;
+}
+
+.validation-badge.valid {
+  background: rgba(22, 163, 74, 0.1);
+  color: var(--accent-success);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+}
+
+.validation-badge.invalid {
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--accent-danger);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  cursor: pointer;
+}
+
+.validation-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  margin-top: var(--space-xs);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-tooltip);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+
+.validation-badge.invalid:hover .validation-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.validation-tooltip ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.validation-tooltip li {
+  margin: var(--space-xs) 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.validation-tooltip li::before {
+  content: '•';
+  color: var(--accent-danger);
+  margin-right: var(--space-sm);
+}
+
+/* Node Styles */
+.react-flow__node {
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+  font-family: var(--font-family);
+}
+
+.react-flow__node.selected {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-md);
+}
+
+.react-flow__node:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Node Editor Modal */
+.node-editor-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+}
+
+.node-editor {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 400px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.node-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.node-editor-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+}
+
+.close-button:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.node-editor-content {
+  padding: var(--space-lg);
+}
+
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.node-editor-footer {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: flex-end;
+  padding: var(--space-lg);
+  background: var(--bg-tertiary);
+  border-top: 1px solid var(--border-primary);
+}
+
+/* Node Delete Button */
+.node-delete-button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: Arial, sans-serif;
+  line-height: 0.8;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.node-delete-button:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.workflow-node:hover .node-delete-button,
+.decision-node:hover .node-delete-button {
+  opacity: 1;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .workflow-sidebar {
+    width: 200px;
+  }
+  
+  .palette-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .workflow-content {
+    flex-direction: column;
+  }
+  
+  .workflow-sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-primary);
+  }
+  
+  .palette-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
