@@ -132,3 +132,30 @@ Simple workflow creator UI
   }
 }
 ```
+
+## Key design decitions
+- Leveraged canvas to external dependency ([React Flow](https://reactflow.dev/)), better to not re-invent the wheel
+- [Vite](https://vite.dev/) for bundling + local development. Fastest and most reliable bundling tool (and easy to use)
+- JSON import / export via text editor
+
+## Tradeoffs
+- No central state manager
+- No unit testing
+- No centralized Error Boundary
+- No i18n (internacionalization) system
+- No a11y (accesibility) compliance (not tested)
+
+## Time Spent
+Roughly 3hs, split in a 2 hours MVP, then another hour of cleanup
+
+## Next Steps
+- Introduce a central state manager, [Zuztand](https://zustand.docs.pmnd.rs/getting-started/introduction) would be my choice, bieng lightweight and with little overhead for a redux-like experience
+- Introuce Error boundaries
+- Introduce i18n
+- Ensure a11y compliance
+- Introduce unit testing for the project
+- Introduce better Interfaces for shared use cases (for example, Node interface)
+- Introduce styles framework, for faster and easier styling ([Tailwind](https://tailwindcss.com/))
+- Option to export / import JSON files (in addition of text editor)
+- Integrate floating pallete (instead of side panel), for a more stylish design
+
